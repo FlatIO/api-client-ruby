@@ -1,6 +1,7 @@
 # Ruby Client for the Flat REST API
 
 [![Build Status](https://travis-ci.org/FlatIO/api-client-ruby.svg?branch=master)](https://travis-ci.org/FlatIO/api-client-ruby)
+[![Rubygems](https://img.shields.io/gem/v/flat_api.svg)](https://rubygems.org/gems/flat_api)
 
 The Flat API allows you to easily extend the abilities of the [Flat Platform](https://flat.io), with a wide range of use cases including the following:
 - Creating and importing new music scores using MusicXML or MIDI files
