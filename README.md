@@ -27,15 +27,15 @@ gem build flat_api.gemspec
 Then either install the gem locally:
 
 ```shell
-gem install ./flat_api-0.1.0.gem
+gem install ./flat_api-0.1.1.gem
 ```
-(for development, run `gem install --dev ./flat_api-0.1.0.gem` to install the development dependencies)
+(for development, run `gem install --dev ./flat_api-0.1.1.gem` to install the development dependencies)
 
 or publish the gem to a gem hosting service, e.g. [RubyGems](https://rubygems.org/).
 
 Finally add this to the Gemfile:
 
-    gem 'flat_api', '~> 0.1.0'
+    gem 'flat_api', '~> 0.1.1'
 
 ### Install from Git
 
