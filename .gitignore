@@ -12,7 +12,6 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
-git_push.sh
 
 ## Specific to RubyMotion:
 .dat*
