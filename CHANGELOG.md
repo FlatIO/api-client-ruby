@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0
+
+Spec version 2.6.0
+
 ## 0.1.2
 
 Spec version 2.5.2

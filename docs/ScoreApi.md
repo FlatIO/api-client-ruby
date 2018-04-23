@@ -30,16 +30,17 @@ Method | HTTP request | Description
 [**mark_score_comment_unresolved**](ScoreApi.md#mark_score_comment_unresolved) | **DELETE** /scores/{score}/comments/{comment}/resolved | Mark the comment as unresolved
 [**post_score_comment**](ScoreApi.md#post_score_comment) | **POST** /scores/{score}/comments | Post a new comment
 [**remove_score_collaborator**](ScoreApi.md#remove_score_collaborator) | **DELETE** /scores/{score}/collaborators/{collaborator} | Delete a collaborator
+[**untrash_score**](ScoreApi.md#untrash_score) | **POST** /scores/{score}/untrash | Untrash a score
 [**update_score_comment**](ScoreApi.md#update_score_comment) | **PUT** /scores/{score}/comments/{comment} | Update an existing comment
 [**update_score_track**](ScoreApi.md#update_score_track) | **PUT** /scores/{score}/tracks/{track} | Update an audio or video track linked to a score
 
 
 # **add_score_collaborator**
-> ScoreCollaborator add_score_collaborator(score, body)
+> ResourceCollaborator add_score_collaborator(scorebody)
 
 Add a new collaborator
 
-Share a score with a single user or a group. This API call allows to add, invite and update the collaborators of a document. - To add an existing Flat user to the document, specify its unique identifier in the `user` property. - To invite an external user to the document, specify its email in the `userEmail` property. - To add a Flat group to the document, specify its unique identifier in the `group` property. - To update an existing collaborator, process the same request with different rights. 
+Share a score with a single user or a group. This API call allows to add, invite and update the collaborators of a resource. - To add an existing Flat user to the resource, specify its unique identifier in the `user` property. - To invite an external user to the resource, specify its email in the `userEmail` property. - To add a Flat group to the resource, specify its unique identifier in the `group` property. - To update an existing collaborator, process the same request with different rights. 
 
 ### Example
 ```ruby
@@ -55,12 +56,12 @@ api_instance = FlatApi::ScoreApi.new
 
 score = "score_example" # String | Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. `ScoreDetails.id`) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with `drive-` (e.g. `drive-0B000000000`). 
 
-body = FlatApi::ScoreCollaboratorCreation.new # ScoreCollaboratorCreation | 
+body = FlatApi::ResourceCollaboratorCreation.new # ResourceCollaboratorCreation | 
 
 
 begin
   #Add a new collaborator
-  result = api_instance.add_score_collaborator(score, body)
+  result = api_instance.add_score_collaborator(scorebody)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->add_score_collaborator: #{e}"
@@ -72,11 +73,11 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
- **body** | [**ScoreCollaboratorCreation**](ScoreCollaboratorCreation.md)|  | 
+ **body** | [**ResourceCollaboratorCreation**](ResourceCollaboratorCreation.md)|  | 
 
 ### Return type
 
-[**ScoreCollaborator**](ScoreCollaborator.md)
+[**ResourceCollaborator**](ResourceCollaborator.md)
 
 ### Authorization
 
@@ -90,7 +91,7 @@ Name | Type | Description  | Notes
 
 
 # **add_score_track**
-> ScoreTrack add_score_track(score, body)
+> ScoreTrack add_score_track(scorebody)
 
 Add a new video or audio track to the score
 
@@ -115,7 +116,7 @@ body = FlatApi::ScoreTrackCreation.new # ScoreTrackCreation |
 
 begin
   #Add a new video or audio track to the score
-  result = api_instance.add_score_track(score, body)
+  result = api_instance.add_score_track(scorebody)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->add_score_track: #{e}"
@@ -149,7 +150,7 @@ Name | Type | Description  | Notes
 
 Create a new score
 
-Use this API method to **create a new music score in the current User account**. You will need a MusicXML 3 (`vnd.recordare.musicxml` or `vnd.recordare.musicxml+xml`) or a MIDI (`audio/midi`) file to create the new Flat document.  This API call will automatically create the first revision of the document, the score can be modified by the using our web application or by uploading a new revision of this file (`POST /v2/scores/{score}/revisions/{revision}`).  The currently authenticated user will be granted owner of the file and will be able to add other collaborators (users and groups). 
+Use this API method to **create a new music score in the current User account**. You will need a MusicXML 3 (`vnd.recordare.musicxml` or `vnd.recordare.musicxml+xml`) or a MIDI (`audio/midi`) file to create the new Flat document.  This API call will automatically create the first revision of the document, the score can be modified by the using our web application or by uploading a new revision of this file (`POST /v2/scores/{score}/revisions/{revision}`).  The currently authenticated user will be granted owner of the file and will be able to add other collaborators (users and groups).  If no `collection` is specified, the API will create the score in the most appropriate collection. This can be the `root` collection or a different collection based on the user's settings or API authentication method. If a `collection` is specified and this one has more public privacy settings than the score (e.g. `public` vs `private` for the score), the privacy settings of the created score will be adjusted to the collection ones. You can check the adjusted privacy settings in the returned score `privacy`, and optionally adjust these settings if needed using `PUT /scores/{score}`. 
 
 ### Example
 ```ruby
@@ -197,7 +198,7 @@ Name | Type | Description  | Notes
 
 
 # **create_score_revision**
-> ScoreRevision create_score_revision(score, body)
+> ScoreRevision create_score_revision(scorebody)
 
 Create a new revision
 
@@ -222,7 +223,7 @@ body = FlatApi::ScoreRevisionCreation.new # ScoreRevisionCreation |
 
 begin
   #Create a new revision
-  result = api_instance.create_score_revision(score, body)
+  result = api_instance.create_score_revision(scorebody)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->create_score_revision: #{e}"
@@ -252,11 +253,11 @@ Name | Type | Description  | Notes
 
 
 # **delete_score**
-> delete_score(score, )
+> delete_score(score)
 
 Delete a score
 
-This API call will schedule the deletion of the score, its revisions, and whole history. The user calling this API method must have the `aclAdmin` rights on this document to process this action. The score won't be accessible anymore after calling this method and the user's quota will directly be updated. 
+This method can be used by the owner/admin (`aclAdmin` rights) of a score as well as regular collaborators.  When called by an owner/admin, it will schedule the deletion of the score, its revisions, and complete history. The score won't be accessible anymore after calling this method and the user's quota will directly be updated.  When called by a regular collaborator (`aclRead` / `aclWrite`), the score will be unshared (i.e. removed from the account & own collections). 
 
 ### Example
 ```ruby
@@ -275,7 +276,7 @@ score = "score_example" # String | Unique identifier of the score document. This
 
 begin
   #Delete a score
-  api_instance.delete_score(score, )
+  api_instance.delete_score(score)
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->delete_score: #{e}"
 end
@@ -303,7 +304,7 @@ nil (empty response body)
 
 
 # **delete_score_comment**
-> delete_score_comment(score, comment, opts)
+> delete_score_comment(scorecomment, opts)
 
 Delete a comment
 
@@ -324,12 +325,12 @@ score = "score_example" # String | Unique identifier of the score document. This
 comment = "comment_example" # String | Unique identifier of a sheet music comment 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #Delete a comment
-  api_instance.delete_score_comment(score, comment, opts)
+  api_instance.delete_score_comment(scorecomment, opts)
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->delete_score_comment: #{e}"
 end
@@ -341,7 +342,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
  **comment** | **String**| Unique identifier of a sheet music comment  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
@@ -359,7 +360,7 @@ nil (empty response body)
 
 
 # **delete_score_track**
-> delete_score_track(score, track)
+> delete_score_track(scoretrack)
 
 Remove an audio or video track linked to the score
 
@@ -382,7 +383,7 @@ track = "track_example" # String | Unique identifier of a score audio track
 
 begin
   #Remove an audio or video track linked to the score
-  api_instance.delete_score_track(score, track)
+  api_instance.delete_score_track(scoretrack)
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->delete_score_track: #{e}"
 end
@@ -411,11 +412,11 @@ nil (empty response body)
 
 
 # **edit_score**
-> ScoreDetails edit_score(score, , opts)
+> ScoreDetails edit_score(score, opts)
 
 Edit a score's metadata
 
-This API method allows you to change the metadata of a score document (e.g. its `title` or `privacy`), all the properties are optional.  To edit the file itself, create a new revision using the appropriate method (`POST /v2/scores/{score}/revisions/{revision}`). 
+This API method allows you to change the metadata of a score document (e.g. its `title` or `privacy`), all the properties are optional.  To edit the file itself, create a new revision using the appropriate method (`POST /v2/scores/{score}/revisions/{revision}`).  When editing the `title` of the score, the API metadata are updated directly when calling this method, unlike the data itself. The title in the score data will be \"lazy\" updated at the next score save with the editor or our internal save. 
 
 ### Example
 ```ruby
@@ -437,7 +438,7 @@ opts = {
 
 begin
   #Edit a score's metadata
-  result = api_instance.edit_score(score, , opts)
+  result = api_instance.edit_score(score, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->edit_score: #{e}"
@@ -467,7 +468,7 @@ Name | Type | Description  | Notes
 
 
 # **fork_score**
-> ScoreDetails fork_score(score, body, opts)
+> ScoreDetails fork_score(scorebody, opts)
 
 Fork a score
 
@@ -490,12 +491,12 @@ score = "score_example" # String | Unique identifier of the score document. This
 body = FlatApi::ScoreFork.new # ScoreFork | 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #Fork a score
-  result = api_instance.fork_score(score, body, opts)
+  result = api_instance.fork_score(scorebody, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->fork_score: #{e}"
@@ -508,7 +509,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
  **body** | [**ScoreFork**](ScoreFork.md)|  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
@@ -636,7 +637,7 @@ Name | Type | Description  | Notes
 
 
 # **get_score**
-> ScoreDetails get_score(score, , opts)
+> ScoreDetails get_score(score, opts)
 
 Get a score's metadata
 
@@ -657,12 +658,12 @@ api_instance = FlatApi::ScoreApi.new
 score = "score_example" # String | Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. `ScoreDetails.id`) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with `drive-` (e.g. `drive-0B000000000`). 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #Get a score's metadata
-  result = api_instance.get_score(score, , opts)
+  result = api_instance.get_score(score, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->get_score: #{e}"
@@ -674,7 +675,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
@@ -692,7 +693,7 @@ Name | Type | Description  | Notes
 
 
 # **get_score_collaborator**
-> ScoreCollaborator get_score_collaborator(score, collaborator, opts)
+> ResourceCollaborator get_score_collaborator(scorecollaborator, opts)
 
 Get a collaborator
 
@@ -715,12 +716,12 @@ score = "score_example" # String | Unique identifier of the score document. This
 collaborator = "collaborator_example" # String | Unique identifier of a **collaborator permission**, or unique identifier of a **User**, or unique identifier of a **Group** 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #Get a collaborator
-  result = api_instance.get_score_collaborator(score, collaborator, opts)
+  result = api_instance.get_score_collaborator(scorecollaborator, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->get_score_collaborator: #{e}"
@@ -733,11 +734,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
  **collaborator** | **String**| Unique identifier of a **collaborator permission**, or unique identifier of a **User**, or unique identifier of a **Group**  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
-[**ScoreCollaborator**](ScoreCollaborator.md)
+[**ResourceCollaborator**](ResourceCollaborator.md)
 
 ### Authorization
 
@@ -751,7 +752,7 @@ Name | Type | Description  | Notes
 
 
 # **get_score_collaborators**
-> Array&lt;ScoreCollaborator&gt; get_score_collaborators(score, , opts)
+> Array&lt;ResourceCollaborator&gt; get_score_collaborators(score, opts)
 
 List the collaborators
 
@@ -772,12 +773,12 @@ api_instance = FlatApi::ScoreApi.new
 score = "score_example" # String | Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. `ScoreDetails.id`) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with `drive-` (e.g. `drive-0B000000000`). 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #List the collaborators
-  result = api_instance.get_score_collaborators(score, , opts)
+  result = api_instance.get_score_collaborators(score, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->get_score_collaborators: #{e}"
@@ -789,11 +790,11 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
-[**Array&lt;ScoreCollaborator&gt;**](ScoreCollaborator.md)
+[**Array&lt;ResourceCollaborator&gt;**](ResourceCollaborator.md)
 
 ### Authorization
 
@@ -807,7 +808,7 @@ Name | Type | Description  | Notes
 
 
 # **get_score_comments**
-> Array&lt;ScoreComment&gt; get_score_comments(score, , opts)
+> Array&lt;ScoreComment&gt; get_score_comments(score, opts)
 
 List comments
 
@@ -828,12 +829,15 @@ api_instance = FlatApi::ScoreApi.new
 score = "score_example" # String | Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. `ScoreDetails.id`) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with `drive-` (e.g. `drive-0B000000000`). 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  type: "type_example", # String | Filter the comments by type
+  sort: "sort_example", # String | Sort
+  direction: "direction_example", # String | Sort direction
 }
 
 begin
   #List comments
-  result = api_instance.get_score_comments(score, , opts)
+  result = api_instance.get_score_comments(score, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->get_score_comments: #{e}"
@@ -845,7 +849,10 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **type** | **String**| Filter the comments by type | [optional] 
+ **sort** | **String**| Sort | [optional] 
+ **direction** | **String**| Sort direction | [optional] 
 
 ### Return type
 
@@ -863,7 +870,7 @@ Name | Type | Description  | Notes
 
 
 # **get_score_revision**
-> ScoreRevision get_score_revision(score, revision, , opts)
+> ScoreRevision get_score_revision(scorerevision, , opts)
 
 Get a score revision
 
@@ -886,12 +893,12 @@ score = "score_example" # String | Unique identifier of the score document. This
 revision = "revision_example" # String | Unique identifier of a score revision. You can use `last` to fetch the information related to the last version created. 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #Get a score revision
-  result = api_instance.get_score_revision(score, revision, , opts)
+  result = api_instance.get_score_revision(scorerevision, , opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->get_score_revision: #{e}"
@@ -904,7 +911,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
  **revision** | **String**| Unique identifier of a score revision. You can use &#x60;last&#x60; to fetch the information related to the last version created.  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
@@ -922,7 +929,7 @@ Name | Type | Description  | Notes
 
 
 # **get_score_revision_data**
-> String get_score_revision_data(score, revision, format, opts)
+> String get_score_revision_data(scorerevision, format, opts)
 
 Get a score revision data
 
@@ -947,14 +954,14 @@ revision = "revision_example" # String | Unique identifier of a score revision. 
 format = "format_example" # String | The format of the file you will retrieve
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
-  only_cached: true, # BOOLEAN | Only return files already generated and cached in Flat's production cache. If the file is not availabe, a 404 will be returned 
-  parts: "parts_example" # String | An optional a set of parts to be exported. This parameter must be specified with a list of integers. For example \"1,2,5\". 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  parts: "parts_example", # String | An optional a set of parts to be exported. This parameter must be specified with a list of integers. For example \"1,2,5\". 
+  only_cached: true # BOOLEAN | Only return files already generated and cached in Flat's production cache. If the file is not availabe, a 404 will be returned 
 }
 
 begin
   #Get a score revision data
-  result = api_instance.get_score_revision_data(score, revision, format, opts)
+  result = api_instance.get_score_revision_data(scorerevision, format, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->get_score_revision_data: #{e}"
@@ -968,9 +975,9 @@ Name | Type | Description  | Notes
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
  **revision** | **String**| Unique identifier of a score revision. You can use &#x60;last&#x60; to fetch the information related to the last version created.  | 
  **format** | **String**| The format of the file you will retrieve | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
- **only_cached** | **BOOLEAN**| Only return files already generated and cached in Flat&#39;s production cache. If the file is not availabe, a 404 will be returned  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
  **parts** | **String**| An optional a set of parts to be exported. This parameter must be specified with a list of integers. For example \&quot;1,2,5\&quot;.  | [optional] 
+ **only_cached** | **BOOLEAN**| Only return files already generated and cached in Flat&#39;s production cache. If the file is not availabe, a 404 will be returned  | [optional] 
 
 ### Return type
 
@@ -988,7 +995,7 @@ Name | Type | Description  | Notes
 
 
 # **get_score_revisions**
-> Array&lt;ScoreRevision&gt; get_score_revisions(score, , opts)
+> Array&lt;ScoreRevision&gt; get_score_revisions(score, opts)
 
 List the revisions
 
@@ -1009,12 +1016,12 @@ api_instance = FlatApi::ScoreApi.new
 score = "score_example" # String | Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. `ScoreDetails.id`) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with `drive-` (e.g. `drive-0B000000000`). 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #List the revisions
-  result = api_instance.get_score_revisions(score, , opts)
+  result = api_instance.get_score_revisions(score, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->get_score_revisions: #{e}"
@@ -1026,7 +1033,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
@@ -1044,7 +1051,7 @@ Name | Type | Description  | Notes
 
 
 # **get_score_submissions**
-> Array&lt;AssignmentSubmission&gt; get_score_submissions(score, )
+> Array&lt;AssignmentSubmission&gt; get_score_submissions(score)
 
 List submissions related to the score
 
@@ -1067,7 +1074,7 @@ score = "score_example" # String | Unique identifier of the score document. This
 
 begin
   #List submissions related to the score
-  result = api_instance.get_score_submissions(score, )
+  result = api_instance.get_score_submissions(score)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->get_score_submissions: #{e}"
@@ -1096,7 +1103,7 @@ Name | Type | Description  | Notes
 
 
 # **get_score_track**
-> ScoreTrack get_score_track(score, track, opts)
+> ScoreTrack get_score_track(scoretrack, opts)
 
 Retrieve the details of an audio or video track linked to a score
 
@@ -1117,12 +1124,12 @@ score = "score_example" # String | Unique identifier of the score document. This
 track = "track_example" # String | Unique identifier of a score audio track 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #Retrieve the details of an audio or video track linked to a score
-  result = api_instance.get_score_track(score, track, opts)
+  result = api_instance.get_score_track(scoretrack, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->get_score_track: #{e}"
@@ -1135,7 +1142,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
  **track** | **String**| Unique identifier of a score audio track  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
@@ -1157,7 +1164,7 @@ Name | Type | Description  | Notes
 
 List user's scores
 
-Get the list of scores owned by the User 
+Get the list of public scores owned by a User.  **DEPRECATED**: Please note that the current behavior will be deprecrated on **2019-01-01**. This method will no longer list private and shared scores, but only public scores of a Flat account. If you want to access to private scores, please use the [Collections API](#tag/Collection) instead. 
 
 ### Example
 ```ruby
@@ -1209,7 +1216,7 @@ Name | Type | Description  | Notes
 
 
 # **list_score_tracks**
-> Array&lt;ScoreTrack&gt; list_score_tracks(score, , opts)
+> Array&lt;ScoreTrack&gt; list_score_tracks(score, opts)
 
 List the audio or video tracks linked to a score
 
@@ -1228,12 +1235,12 @@ api_instance = FlatApi::ScoreApi.new
 score = "score_example" # String | Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. `ScoreDetails.id`) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with `drive-` (e.g. `drive-0B000000000`). 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #List the audio or video tracks linked to a score
-  result = api_instance.list_score_tracks(score, , opts)
+  result = api_instance.list_score_tracks(score, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->list_score_tracks: #{e}"
@@ -1245,7 +1252,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
@@ -1263,7 +1270,7 @@ Name | Type | Description  | Notes
 
 
 # **mark_score_comment_resolved**
-> mark_score_comment_resolved(score, comment, opts)
+> mark_score_comment_resolved(scorecomment, opts)
 
 Mark the comment as resolved
 
@@ -1284,12 +1291,12 @@ score = "score_example" # String | Unique identifier of the score document. This
 comment = "comment_example" # String | Unique identifier of a sheet music comment 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #Mark the comment as resolved
-  api_instance.mark_score_comment_resolved(score, comment, opts)
+  api_instance.mark_score_comment_resolved(scorecomment, opts)
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->mark_score_comment_resolved: #{e}"
 end
@@ -1301,7 +1308,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
  **comment** | **String**| Unique identifier of a sheet music comment  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
@@ -1319,7 +1326,7 @@ nil (empty response body)
 
 
 # **mark_score_comment_unresolved**
-> mark_score_comment_unresolved(score, comment, opts)
+> mark_score_comment_unresolved(scorecomment, opts)
 
 Mark the comment as unresolved
 
@@ -1340,12 +1347,12 @@ score = "score_example" # String | Unique identifier of the score document. This
 comment = "comment_example" # String | Unique identifier of a sheet music comment 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #Mark the comment as unresolved
-  api_instance.mark_score_comment_unresolved(score, comment, opts)
+  api_instance.mark_score_comment_unresolved(scorecomment, opts)
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->mark_score_comment_unresolved: #{e}"
 end
@@ -1357,7 +1364,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
  **comment** | **String**| Unique identifier of a sheet music comment  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
@@ -1375,7 +1382,7 @@ nil (empty response body)
 
 
 # **post_score_comment**
-> ScoreComment post_score_comment(score, body, opts)
+> ScoreComment post_score_comment(scorebody, opts)
 
 Post a new comment
 
@@ -1398,12 +1405,12 @@ score = "score_example" # String | Unique identifier of the score document. This
 body = FlatApi::ScoreCommentCreation.new # ScoreCommentCreation | 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #Post a new comment
-  result = api_instance.post_score_comment(score, body, opts)
+  result = api_instance.post_score_comment(scorebody, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->post_score_comment: #{e}"
@@ -1416,7 +1423,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
  **body** | [**ScoreCommentCreation**](ScoreCommentCreation.md)|  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
@@ -1434,7 +1441,7 @@ Name | Type | Description  | Notes
 
 
 # **remove_score_collaborator**
-> remove_score_collaborator(score, collaborator)
+> remove_score_collaborator(scorecollaborator)
 
 Delete a collaborator
 
@@ -1459,7 +1466,7 @@ collaborator = "collaborator_example" # String | Unique identifier of a **collab
 
 begin
   #Delete a collaborator
-  api_instance.remove_score_collaborator(score, collaborator)
+  api_instance.remove_score_collaborator(scorecollaborator)
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->remove_score_collaborator: #{e}"
 end
@@ -1487,8 +1494,54 @@ nil (empty response body)
 
 
 
+# **untrash_score**
+> untrash_score(score)
+
+Untrash a score
+
+This method will remove the score from the `trash` collection and from the deletion queue, and add it back to the original collections. 
+
+### Example
+```ruby
+# load the gem
+require 'flat_api'
+
+api_instance = FlatApi::ScoreApi.new
+
+score = "score_example" # String | Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. `ScoreDetails.id`) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with `drive-` (e.g. `drive-0B000000000`). 
+
+
+begin
+  #Untrash a score
+  api_instance.untrash_score(score)
+rescue FlatApi::ApiError => e
+  puts "Exception when calling ScoreApi->untrash_score: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
 # **update_score_comment**
-> ScoreComment update_score_comment(score, commentbody, opts)
+> ScoreComment update_score_comment(scorecommentbody, opts)
 
 Update an existing comment
 
@@ -1511,12 +1564,12 @@ comment = "comment_example" # String | Unique identifier of a sheet music commen
 body = FlatApi::ScoreCommentUpdate.new # ScoreCommentUpdate | 
 
 opts = { 
-  sharing_key: "sharing_key_example", # String | This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
+  sharing_key: "sharing_key_example" # String | This sharing key must be specified to access to a score or collection with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document. 
 }
 
 begin
   #Update an existing comment
-  result = api_instance.update_score_comment(score, commentbody, opts)
+  result = api_instance.update_score_comment(scorecommentbody, opts)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->update_score_comment: #{e}"
@@ -1530,7 +1583,7 @@ Name | Type | Description  | Notes
  **score** | **String**| Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. &#x60;ScoreDetails.id&#x60;) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with &#x60;drive-&#x60; (e.g. &#x60;drive-0B000000000&#x60;).  | 
  **comment** | **String**| Unique identifier of a sheet music comment  | 
  **body** | [**ScoreCommentUpdate**](ScoreCommentUpdate.md)|  | 
- **sharing_key** | **String**| This sharing key must be specified to access to a score with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
+ **sharing_key** | **String**| This sharing key must be specified to access to a score or collection with a &#x60;privacy&#x60; mode set to &#x60;privateLink&#x60; and the current user is not a collaborator of the document.  | [optional] 
 
 ### Return type
 
@@ -1548,7 +1601,7 @@ Name | Type | Description  | Notes
 
 
 # **update_score_track**
-> ScoreTrack update_score_track(score, trackbody)
+> ScoreTrack update_score_track(scoretrackbody)
 
 Update an audio or video track linked to a score
 
@@ -1573,7 +1626,7 @@ body = FlatApi::ScoreTrackUpdate.new # ScoreTrackUpdate |
 
 begin
   #Update an audio or video track linked to a score
-  result = api_instance.update_score_track(score, trackbody)
+  result = api_instance.update_score_track(scoretrackbody)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ScoreApi->update_score_track: #{e}"

@@ -625,7 +625,7 @@ Name | Type | Description  | Notes
 
 
 # **get_score_submissions**
-> Array&lt;AssignmentSubmission&gt; get_score_submissions(score, )
+> Array&lt;AssignmentSubmission&gt; get_score_submissions(score)
 
 List submissions related to the score
 
@@ -648,7 +648,7 @@ score = "score_example" # String | Unique identifier of the score document. This
 
 begin
   #List submissions related to the score
-  result = api_instance.get_score_submissions(score, )
+  result = api_instance.get_score_submissions(score)
   p result
 rescue FlatApi::ApiError => e
   puts "Exception when calling ClassApi->get_score_submissions: #{e}"
