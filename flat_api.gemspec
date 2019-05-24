@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'json', '~> 2.1', '>= 2.1.0'
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
-  s.add_development_dependency 'vcr', '~> 3.0', '>= 3.0.1'
+  s.add_development_dependency 'vcr', '>= 3.0.1', '~> 4.0'
   s.add_development_dependency 'webmock', '~> 1.24', '>= 1.24.3'
   s.add_development_dependency 'autotest', '~> 4.4', '>= 4.4.6'
   s.add_development_dependency 'autotest-rails-pure', '~> 4.1', '>= 4.1.2'
