@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/FlatIO/api-client-ruby/compare/v0.3.0...v0.3.1) (2024-03-08)
+
+
+### Bug Fixes
+
+* bump version for rubygem release ([fd11d52](https://github.com/FlatIO/api-client-ruby/commit/fd11d5234f91e346c01dc233ee9343d4773aee7a))
+
 ## [0.3.0](https://github.com/FlatIO/api-client-ruby/compare/v0.2.0...v0.3.0) (2024-03-08)
 
 
