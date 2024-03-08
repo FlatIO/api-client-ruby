@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/FlatIO/api-client-ruby/compare/v0.3.1...v0.3.2) (2024-03-08)
+
+
+### Bug Fixes
+
+* **gh:** permission to write github packages ([a1979e2](https://github.com/FlatIO/api-client-ruby/commit/a1979e2a87bec830353b30355a531ea8c23075ed))
+
 ## [0.3.1](https://github.com/FlatIO/api-client-ruby/compare/v0.3.0...v0.3.1) (2024-03-08)
 
 
