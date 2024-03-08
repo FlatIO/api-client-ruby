@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
 - Browsing, updating, copying, exporting the user&#39;s scores (for example in MP3, WAV or MIDI)
 - Managing educational resources with Flat for Education: creating &amp; updating the organization accounts, the classes, rosters and assignments."
   s.license     = "Apache-2.0"
-  s.required_ruby_version = ">= 2.7"
+  s.required_ruby_version = ">= 3.0"
   s.metadata    = {}
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
