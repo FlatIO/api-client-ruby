@@ -1,13 +1,36 @@
 # FlatApi::UserBasics
 
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **String** | The user unique identifier | [optional] 
-**username** | **String** | The user name (unique for the organization) | [optional] 
-**name** | **String** | A displayable name for the user | [optional] 
-**printable_name** | **String** | The name that can be directly printed (name or username) | [optional] 
-**picture** | **String** | User pictue | [optional] 
-**is_power_user** | **BOOLEAN** | User license status. &#39;True&#39; if user is an individual Power user | [optional] 
 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | The user unique identifier |  |
+| **type** | **String** | The type of user account |  |
+| **product** | [**TutteoProduct**](TutteoProduct.md) |  | [default to &#39;flat&#39;] |
+| **username** | **String** | The user name (unique for the organization) |  |
+| **printable_name** | **String** | The name that can be directly printed (name, firstname &amp; lastname, or username) | [optional] |
+| **firstname** | **String** | Firstname of the user (for education users) | [optional] |
+| **lastname** | **String** | Lastname of the user (for education users) | [optional] |
+| **name** | **String** | A displayable name for the user (for consumer users) | [optional] |
+| **picture** | **String** | The URL of the picture to display |  |
+| **badges** | **Array&lt;String&gt;** | List of badges for the user profile:  - &#x60;power&#x60; - &#x60;staff&#x60; - &#x60;composerOfTheMonth&#x60; - &#x60;ambassador&#x60; - &#x60;challenge&#x60;  | [optional] |
+
+## Example
+
+```ruby
+require 'flat_api'
+
+instance = FlatApi::UserBasics.new(
+  id: null,
+  type: null,
+  product: null,
+  username: null,
+  printable_name: null,
+  firstname: null,
+  lastname: null,
+  name: null,
+  picture: null,
+  badges: null
+)
+```
 
