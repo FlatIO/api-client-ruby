@@ -11,6 +11,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      packages: write
     steps:
     - uses: google-github-actions/release-please-action@v4
       id: release
