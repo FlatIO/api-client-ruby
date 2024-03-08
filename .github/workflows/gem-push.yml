@@ -26,6 +26,10 @@ jobs:
       with:
         ruby-version: 3.3
       if: ${{ steps.release.outputs.release_created }}
+    - name: Install dependencies
+      run: |
+        bundle install
+      if: ${{ steps.release.outputs.release_created }}
     - name: Run tests
       run: |
         bundle exec rspec
