@@ -32,6 +32,12 @@ For more information, please visit [https://flat.io/developers/docs/api/](https:
 
 ## Installation
 
+### Install from rubygem
+
+```shell
+gem install flat_api
+```
+
 ### Build a gem
 
 To build the Ruby code into a gem:
