@@ -2,21 +2,23 @@
 
 All URIs are relative to *https://api.flat.io/v2*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**get_authenticated_user**](AccountApi.md#get_authenticated_user) | **GET** /me | Get current user profile
+| Method | HTTP request | Description |
+| ------ | ------------ | ----------- |
+| [**get_authenticated_user**](AccountApi.md#get_authenticated_user) | **GET** /me | Get current user account |
 
 
-# **get_authenticated_user**
-> UserDetails get_authenticated_user
+## get_authenticated_user
 
-Get current user profile
+> <UserDetails> get_authenticated_user(opts)
+
+Get current user account
 
 Get details about the current authenticated User. 
 
-### Example
+### Examples
+
 ```ruby
-# load the gem
+require 'time'
 require 'flat_api'
 # setup authorization
 FlatApi.configure do |config|
@@ -25,18 +27,42 @@ FlatApi.configure do |config|
 end
 
 api_instance = FlatApi::AccountApi.new
+opts = {
+  only_id: true # Boolean | Only return the user id
+}
 
 begin
-  #Get current user profile
-  result = api_instance.get_authenticated_user
+  # Get current user account
+  result = api_instance.get_authenticated_user(opts)
   p result
 rescue FlatApi::ApiError => e
-  puts "Exception when calling AccountApi->get_authenticated_user: #{e}"
+  puts "Error when calling AccountApi->get_authenticated_user: #{e}"
+end
+```
+
+#### Using the get_authenticated_user_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UserDetails>, Integer, Hash)> get_authenticated_user_with_http_info(opts)
+
+```ruby
+begin
+  # Get current user account
+  data, status_code, headers = api_instance.get_authenticated_user_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UserDetails>
+rescue FlatApi::ApiError => e
+  puts "Error when calling AccountApi->get_authenticated_user_with_http_info: #{e}"
 end
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **only_id** | **Boolean** | Only return the user id | [optional][default to false] |
 
 ### Return type
 
@@ -48,8 +74,6 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
