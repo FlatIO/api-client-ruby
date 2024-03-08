@@ -28,7 +28,7 @@ jobs:
       id: release
       with:
         release-type: ruby
-        package-name: contrived_math
+        package-name: flat_api
         bump-minor-pre-major: true
         version-file: "lib/flat_api/version.rb"
     - name: Publish to GPR
@@ -42,7 +42,7 @@ jobs:
       env:
         GEM_HOST_API_KEY: "Bearer ${{secrets.GITHUB_TOKEN}}"
         OWNER: ${{ github.repository_owner }}
-      if: ${{ steps.release.outputs.release_created }}
+      if: ${{ steps.release.outputs.release_created }}0
     - name: Publish to RubyGems
       run: |
         mkdir -p $HOME/.gem
