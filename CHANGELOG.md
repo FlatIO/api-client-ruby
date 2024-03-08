@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.4](https://github.com/FlatIO/api-client-ruby/compare/v0.3.3...v0.3.4) (2024-03-08)
+
+
+### Bug Fixes
+
+* bump version to 0.3.4 ([ac5999b](https://github.com/FlatIO/api-client-ruby/commit/ac5999b686351ee88770bd9c1279fab09e8a161e))
+
 ## [0.3.3](https://github.com/FlatIO/api-client-ruby/compare/v0.3.2...v0.3.3) (2024-03-08)
 
 
