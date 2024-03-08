@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.3](https://github.com/FlatIO/api-client-ruby/compare/v0.3.2...v0.3.3) (2024-03-08)
+
+
+### Bug Fixes
+
+* **gemspec:** only include lib/ to files list ([576cac9](https://github.com/FlatIO/api-client-ruby/commit/576cac92a848c7b3e4b712feb6429684ec3c16d2))
+
 ## [0.3.2](https://github.com/FlatIO/api-client-ruby/compare/v0.3.1...v0.3.2) (2024-03-08)
 
 
