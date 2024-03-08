@@ -11,5 +11,5 @@ OpenAPI Generator version: 7.3.0
 =end
 
 module FlatApi
-  VERSION = '0.3.0'
+  VERSION = '0.3.1'
 end
