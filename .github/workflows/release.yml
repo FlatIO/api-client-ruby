@@ -1,0 +1,33 @@
+name: Release
+
+# Publishing is triggered by a version tag and nothing else (FR-019a).
+
+on:
+  push:
+    tags: ['[0-9]+.[0-9]+.[0-9]+']
+
+permissions:
+  contents: read
+  id-token: write # OIDC for RubyGems trusted publishing (FR-021a)
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: rubygems
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      - name: The tag must match the packaged version
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          PKG="$(ruby -Ilib -e "require 'flat_api/version'; print FlatApi::VERSION")"
+          [ "$TAG" = "$PKG" ] || { echo "tag $TAG != VERSION $PKG"; exit 1; }
+
+      - run: gem build flat_api.gemspec
+
+      # No API key: RubyGems trusts this repository and workflow by OIDC.
+      - uses: rubygems/release-gem@v1

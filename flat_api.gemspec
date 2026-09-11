@@ -25,18 +25,26 @@ Gem::Specification.new do |s|
   s.summary     = "Ruby Client for Flat REST API (https://flat.io)"
   s.description = "The Flat API allows you to easily extend the abilities of the Flat Platform (https://flat.io), with a wide range of use cases including the following:
 - Creating and importing new music scores using MusicXML or MIDI files
-- Browsing, updating, copying, exporting the user&#39;s scores (for example in MP3, WAV or MIDI)
-- Managing educational resources with Flat for Education: creating &amp; updating the organization accounts, the classes, rosters and assignments."
+- Browsing, updating, copying, exporting the user's scores (for example in MP3, WAV or MIDI)
+- Managing educational resources with Flat for Education: creating & updating the organization accounts, the classes, rosters and assignments."
   s.license     = "Apache-2.0"
-  s.required_ruby_version = ">= 3.0"
+  # Matches the runtime_matrix in .sdkgen.yaml. Claiming 3.0 advertised support for a version
+  # that end of life passed and that CI never builds.
+  s.required_ruby_version = ">= 3.3"
   s.metadata    = {}
 
-  s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
+  # tools/openapi-config.json selects the faraday library, so these are what the generated client
+  # actually requires. It declared typhoeus, the generator's other option, which meant `gem install
+  # flat_api` followed by `require 'flat_api'` raised LoadError on faraday.
+  s.add_runtime_dependency 'faraday', '>= 1.0.1', '< 3.0'
+  s.add_runtime_dependency 'faraday-multipart', '~> 1.0'
+  s.add_runtime_dependency 'marcel', '~> 1.0'
 
-  s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
 
-  s.files         = Dir.glob("lib/**/*").sort.select { |f| !f.empty? }
-  s.test_files    = `find spec/*`.split("\n")
+  # LICENSE has to be in the gem, not only in the repository: the gem declares Apache-2.0 above and
+  # shipping the declaration without the text is what the licence itself asks you not to do.
+  s.files         = Dir.glob("lib/**/*").sort.select { |f| !f.empty? } +
+                    %w[LICENSE README.md CHANGELOG.md]
   s.executables   = []
   s.require_paths = ["lib"]
 end
