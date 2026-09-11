@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   # flat_api` followed by `require 'flat_api'` raised LoadError on faraday.
   s.add_runtime_dependency 'faraday', '>= 1.0.1', '< 3.0'
   s.add_runtime_dependency 'faraday-multipart', '~> 1.0'
-  s.add_runtime_dependency 'marcel', '~> 1.0'
+  s.add_runtime_dependency 'marcel', '>= 1', '< 3'
 
 
   # LICENSE has to be in the gem, not only in the repository: the gem declares Apache-2.0 above and
