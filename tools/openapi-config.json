@@ -1,0 +1,11 @@
+{
+  "gemName": "flat_api",
+  "gemVersion": "1.0.0",
+  "moduleName": "FlatApi",
+  "library": "faraday",
+  "gemLicense": "Apache-2.0",
+  "gemHomepage": "https://github.com/FlatIO/api-client-ruby",
+  "gemAuthor": "Flat Team",
+  "gemAuthorEmail": "developers@flat.io",
+  "hideGenerationTimestamp": true
+}

@@ -1,0 +1,33 @@
+name: CI
+
+# Build and load checks. Everything that needs a credential runs elsewhere and reports
+# back as a commit status, so no secret is reachable from this workflow.
+
+on:
+  pull_request:
+  push:
+    branches: [master, main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: build (ruby ${{ matrix.ruby }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['3.3', '3.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Load every file
+        run: bundle exec ruby -Ilib -e "require 'flat_api'; puts FlatApi::VERSION"

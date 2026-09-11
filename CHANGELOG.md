@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.0.0](https://github.com/FlatIO/api-client-ruby/compare/v0.3.5...1.0.0) (2026-09-11)
+
+The first stable release. Regenerated against API specification 2.26.1, covering all 123 public
+operations. See [MIGRATION.md](MIGRATION.md) for the upgrade from 0.3.x.
+
+### Features
+
+* Typed errors: an API failure raises `FlatNotFoundError`, `FlatAuthenticationError` and the rest
+  of the `FlatApi::FlatError` hierarchy, rather than one generic exception carrying a status code.
+* Retries with backoff. Flat returns HTTP 403 for rate limiting with the reset time in
+  `X-RateLimit-Reset`, so the retry decision reads the response body's `code` to tell a throttle
+  from a genuine authorization failure.
+* Pagination that follows the `Link` header cursor, which the specification does not declare.
+* OAuth2 token refresh.
+
+### Breaking Changes
+
+* The HTTP layer is Faraday, not Typhoeus. Typhoeus needs libcurl; Faraday does not.
+* Requires Ruby 3.3 or later, matching the versions upstream still supports.
+* Models and operations are regenerated, so names follow the current specification.
+
 ## [0.3.5](https://github.com/FlatIO/api-client-ruby/compare/v0.3.4...v0.3.5) (2024-03-08)
 
 
