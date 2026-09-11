@@ -44,12 +44,19 @@ jobs:
       - name: Wait for the release to appear on RubyGems
         run: |
           VERSION="$(cat VERSION)"
+          # Fetched into a scratch directory: gem fetch writes into the working directory, which
+          # already holds the gem this job just built, and a check that can read its own output is
+          # not a check. No --no-document here either: gem fetch rejects it, which made the first
+          # version of this step fail on every attempt for five minutes while the push had in fact
+          # succeeded, reporting a red release for a gem that was live.
+          WORK="$(mktemp -d)"
           for _ in $(seq 1 30); do
-            if gem fetch flat_api --version "$VERSION" --no-document >/dev/null 2>&1; then
-              echo "flat_api $VERSION is published"
+            if ( cd "$WORK" && gem fetch flat_api --version "$VERSION" >/dev/null 2>&1 ); then
+              echo "flat_api $VERSION is published and downloadable"
               exit 0
             fi
             sleep 10
           done
-          echo "flat_api $VERSION did not appear on RubyGems within five minutes"
+          echo "flat_api $VERSION did not appear on RubyGems within five minutes. Last attempt:"
+          ( cd "$WORK" && gem fetch flat_api --version "$VERSION" ) || true
           exit 1
