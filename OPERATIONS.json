@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "spec_version": "2.26.1",
+  "spec_version": "2.26.2",
   "generator": {
     "name": "ruby",
     "version": "7.24.0"
@@ -474,7 +474,7 @@
       "operation_id": "getGroupScores",
       "method": "get",
       "path": "/groups/{group}/scores",
-      "symbol": "group_api.get_group_scores",
+      "symbol": "score_api.get_group_scores",
       "paginated": false,
       "documented": true
     },
@@ -570,7 +570,7 @@
       "operation_id": "getScoreSubmissions",
       "method": "get",
       "path": "/scores/{score}/submissions",
-      "symbol": "class_api.get_score_submissions",
+      "symbol": "score_api.get_score_submissions",
       "paginated": false,
       "documented": true
     },

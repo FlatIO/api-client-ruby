@@ -16,11 +16,11 @@
 | **cover_file** | **String** | The id of the cover to display | [optional] |
 | **attachments** | [**Array&lt;MediaAttachment&gt;**](MediaAttachment.md) | Reference material handed to the students with the assignment: scores, videos, links and Drive files. A score attached here is the one each student receives their own copy of.  |  |
 | **use_dedicated_attachments** | **Boolean** | For all assignments created after 02/2023, all the underlying resources must be dedicated and stored in the assignment. This boolean indicates that this assignment only supports dedicated attachments.  | [optional] |
-| **max_points** | **Float** | If set, the grading will be enabled for the assignement  | [optional] |
+| **max_points** | **Float** | If set, the grading will be enabled for the assignment  | [optional] |
 | **release_grades** | **String** | For worksheets, how grading will work for the assignment: - If set to &#x60;auto&#x60;, the grades will be automatically released when the student submits the submissions - If set to &#x60;manual&#x60;, the grades will only be set as &#x60;draftGrade&#x60; and will be released when the teacher returns the submissions  | [optional] |
-| **shuffle_exercises** | **Boolean** | Mixing worksheets exercises for each student | [optional] |
+| **shuffle_exercises** | **Boolean** | Shuffle the worksheet exercises for each student | [optional] |
 | **toolset** | **String** | The id of the associated toolset | [optional] |
-| **nb_playback_authorized** | **Float** | The number of playback authorized on the scores of the assignment. | [optional] |
+| **nb_playback_authorized** | **Float** | The number of playbacks authorized on the scores of the assignment. | [optional] |
 | **restrict_play_note** | **Boolean** | Restrict the ability to get an audio feedback every time a student adds or selects a note. | [optional] |
 | **restrict_to_audio_tracks** | **Boolean** | Restrict the audio source to provided audio tracks on a score. Students won&#39;t be able to use the editor playback. | [optional] |
 | **submission_students_mode** | [**AssignmentSubmissionStudentsMode**](AssignmentSubmissionStudentsMode.md) |  | [optional] |
@@ -34,7 +34,7 @@
 | **classroom** | **String** | The unique identifier of the class where this assignment was posted | [optional] |
 | **creation_date** | **Time** | The creation date of this assignment |  |
 | **scheduled_date** | **Time** | The publication (scheduled) date of the assignment. If this one is specified, the assignment will only be listed to the teachers of the class.  | [optional] |
-| **due_date** | **Time** | The due date of this assignment, late submissions will be marked as paste due.  | [optional] |
+| **due_date** | **Time** | The due date of this assignment, late submissions will be marked as past due.  | [optional] |
 | **assignee_mode** | **String** | Possible modes of assigning assignments | [optional] |
 | **assigned_students** | **Array&lt;String&gt;** | Identifiers for the students that have access to the assignment | [optional] |
 | **assigned_groups** | [**Array&lt;AssignmentGroup&gt;**](AssignmentGroup.md) | Groups that have access to the assignment (for shared writing assignments) | [optional] |

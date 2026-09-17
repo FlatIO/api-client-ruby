@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **url** | **String** | URL returned by the task worker | [optional] |
-| **error** | **String** | Error returned by task worker | [optional] |
+| **url** | **String** | URL of the generated file, when the task produces one | [optional] |
+| **error** | **String** | Error message, when the task failed | [optional] |
 
 ## Example
 

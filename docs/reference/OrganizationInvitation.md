@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | The invitation unique identifier | [optional] |
 | **creation_date** | **Time** | The creation date of the invitation | [optional] |
-| **organization** | **String** | The unique identifier of the Organization owning this class |  |
+| **organization** | **String** | The unique identifier of the Organization this invitation belongs to |  |
 | **organization_role** | [**OrganizationRoles**](OrganizationRoles.md) |  |  |
 | **custom_code** | **String** | Enrollment code to use when joining this organization |  |
 | **email** | **String** | The email address this invitation was sent to | [optional] |

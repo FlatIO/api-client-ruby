@@ -21,13 +21,13 @@
 | **bio** | **String** | User&#39;s biography | [optional] |
 | **registration_date** | **Time** | Date the user signed up | [optional] |
 | **liked_scores_count** | **Integer** | Number of the scores liked by the user | [optional] |
-| **followers_count** | **Integer** | Number of followers the user have | [optional] |
-| **following_count** | **Integer** | Number of people the user follow | [optional] |
-| **owned_public_scores_count** | **Integer** | Number of public scores the user have | [optional] |
+| **followers_count** | **Integer** | Number of followers the user has | [optional] |
+| **following_count** | **Integer** | Number of people the user follows | [optional] |
+| **owned_public_scores_count** | **Integer** | Number of public scores the user owns | [optional] |
 | **all_public_scores_count** | **Integer** | Total number of public scores the user participates in (owned + joined) | [optional] |
 | **likes_count** | **Integer** | Number of likes on the user published scores | [optional] |
 | **plays_count** | **Integer** | Number of plays on the user published scores | [optional] |
-| **cover_picture** | **String** | Cover picture (backgroud) for the profile | [optional] |
+| **cover_picture** | **String** | Cover picture (background) for the profile | [optional] |
 | **profile_theme** | **String** | Theme (background) for the profile | [optional] |
 | **links** | [**UserCommunityProfileLinks**](UserCommunityProfileLinks.md) |  | [optional] |
 

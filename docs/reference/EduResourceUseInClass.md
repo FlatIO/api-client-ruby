@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **classroom** | **String** | The destination classroom where the resource will be copied. |  |
-| **assignment** | **String** | An optional destination assignment where the original assignement will be copied. Must be a draft. | [optional] |
+| **assignment** | **String** | An optional destination assignment where the original assignment will be copied. Must be a draft. | [optional] |
 
 ## Example
 

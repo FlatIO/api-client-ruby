@@ -5,9 +5,9 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **part_uuid** | **String** | The unique identifier (UUID) of the score part |  |
-| **staff_idx** | **Float** | (Deprecated, use &#x60;staffUuid&#x60;) The identififer of the staff | [optional] |
-| **staff_uuid** | **String** | The unique identififer (UUID) of the staff | [optional] |
-| **measure_uuids** | **Array&lt;String&gt;** | The list of measure UUIds |  |
+| **staff_idx** | **Float** | (Deprecated, use &#x60;staffUuid&#x60;) The identifier of the staff | [optional] |
+| **staff_uuid** | **String** | The unique identifier (UUID) of the staff | [optional] |
+| **measure_uuids** | **Array&lt;String&gt;** | The list of measure UUIDs |  |
 | **start_time_pos** | **Float** |  |  |
 | **stop_time_pos** | **Float** |  |  |
 | **start_dpq** | **Float** |  |  |

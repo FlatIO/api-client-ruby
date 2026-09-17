@@ -29,7 +29,7 @@ FlatApi.configure do |config|
 end
 
 api_instance = FlatApi::UserApi.new
-user = 'user_example' # String | This route parameter is the unique identifier of the user. You can specify an email instead of an unique identifier. If you are executing this request authenticated, you can use `me` as a value instead of the current User unique identifier to work on the current authenticated user. 
+user = 'user_example' # String | This route parameter is the unique identifier of the user. You can specify an email instead of a unique identifier. If you are executing this request authenticated, you can use `me` as a value instead of the current User unique identifier to work on the current authenticated user. 
 
 begin
   # Get a public user profile
@@ -62,7 +62,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **user** | **String** | This route parameter is the unique identifier of the user. You can specify an email instead of an unique identifier. If you are executing this request authenticated, you can use &#x60;me&#x60; as a value instead of the current User unique identifier to work on the current authenticated user.  |  |
+| **user** | **String** | This route parameter is the unique identifier of the user. You can specify an email instead of a unique identifier. If you are executing this request authenticated, you can use &#x60;me&#x60; as a value instead of the current User unique identifier to work on the current authenticated user.  |  |
 
 ### Return type
 
@@ -161,7 +161,7 @@ end
 
 List user's scores
 
-Get the list of public scores owned by a User. If you want to access to private scores, please use the [Collections API](#tag/Collection). For example `GET /v2/collections/allScores/scores` to list all recently updated scores. 
+Get the list of public scores owned by a User. If you want to access private scores, please use the [Collections API](#tag/Collection). For example `GET /v2/collections/allScores/scores` to list all recently updated scores. 
 
 ### Examples
 

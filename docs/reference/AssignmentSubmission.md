@@ -15,7 +15,7 @@
 | **return_date** | **String** | The date when the teacher returned the work | [optional] |
 | **return_creator** | **String** | The User unique identifier of the teacher who returned the submission  | [optional] |
 | **grade** | **Float** | Optional grade. If unset, no grade was set. | [optional] |
-| **draft_grade** | **Float** | Optional grade. If unset, no grade was set. This value is only visible by the teacher, and we will be set to &#x60;grade&#x60; once the teacher returns the submission | [optional] |
+| **draft_grade** | **Float** | Optional grade. If unset, no grade was set. This value is only visible to the teacher, and is copied to &#x60;grade&#x60; once the teacher returns the submission | [optional] |
 | **max_points** | **Float** | Optional max points for the grade. If set, a corresponding &#x60;draftGrade&#x60; or &#x60;grade&#x60; will be set. | [optional] |
 | **exercises_ids** | **Array&lt;String&gt;** | The ids of exercises when they need to be in a specific order | [optional] |
 | **playback** | [**Array&lt;AssignmentSubmissionPlayback&gt;**](AssignmentSubmissionPlayback.md) |  |  |
