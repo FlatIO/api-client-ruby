@@ -21,7 +21,7 @@
 | **is_pinned** | **Boolean** | Whether the collection is pinned by the owner | [optional] |
 | **contents** | [**CollectionContents**](CollectionContents.md) |  |  |
 | **capabilities** | [**CollectionCapabilities**](CollectionCapabilities.md) |  |  |
-| **collections** | **Array&lt;String&gt;** | The List of parent collections, which includes all the collections this score is included. Please note that you might not have access to all of them. | [optional] |
+| **collections** | **Array&lt;String&gt;** | The list of parent collections this score is included in. Please note that you might not have access to all of them. | [optional] |
 
 ## Example
 

@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **type** | **String** | The type of the assignment resolved: * &#x60;rich&#x60;, &#x60;photo&#x60;, &#x60;video&#x60; are automatically resolved as &#x60;link&#x60; * A &#x60;flat&#x60; attachment is a score document where the unique identifier will be specified in the &#x60;score&#x60; property. Its sharing mode will be provided in the &#x60;sharingMode&#x60; property.  |  |
-| **score** | **String** | An unique Flat score identifier | [optional] |
-| **revision** | **String** | An unique revision identifier of a score | [optional] |
-| **worksheet** | **String** | An unique worksheet identifier | [optional] |
+| **type** | **String** | The resolved type of the attachment: * &#x60;rich&#x60;, &#x60;photo&#x60;, &#x60;video&#x60; are automatically resolved as &#x60;link&#x60; * A &#x60;flat&#x60; attachment is a score document where the unique identifier will be specified in the &#x60;score&#x60; property. Its sharing mode will be provided in the &#x60;sharingMode&#x60; property.  |  |
+| **score** | **String** | A unique Flat score identifier | [optional] |
+| **revision** | **String** | A unique revision identifier of a score | [optional] |
+| **worksheet** | **String** | A unique worksheet identifier | [optional] |
 | **dedicated** | **Boolean** | True if the resource is dedicated for the assignment (for scores and worksheets), meaning on the user-side this one is stored in the assignment | [optional] |
 | **track** | **String** | A unique track identifier | [optional] |
 | **part_uuid** | **String** | The UUID of the instrument part selected for this attachment (for performance submissions) | [optional] |
@@ -21,11 +21,11 @@
 | **url** | **String** | The url of the attachment | [optional] |
 | **thumbnail_url** | **String** | If the attachment type is &#x60;rich&#x60;, &#x60;video&#x60;, &#x60;photo&#x60; or &#x60;link&#x60;, a displayable thumbnail for this attachment  | [optional] |
 | **thumbnail_width** | **Integer** | If the &#x60;thumbnailUrl&#x60; is available, the width of the thumbnail  | [optional] |
-| **thumbnail_height** | **Integer** | If the &#x60;thumbnailUrl&#x60; is available, the width of the thumbnail  | [optional] |
+| **thumbnail_height** | **Integer** | If the &#x60;thumbnailUrl&#x60; is available, the height of the thumbnail  | [optional] |
 | **author_name** | **String** | The resolved author name of the attachment | [optional] |
 | **author_url** | **String** | The resolved author url of the attachment | [optional] |
 | **icon_url** | **String** | The URL of the icon | [optional] |
-| **mime_type** | **String** | The mine type of the file | [optional] |
+| **mime_type** | **String** | The MIME type of the file | [optional] |
 | **google_drive_file_id** | **String** | The ID of the Google Drive File | [optional] |
 | **teacher_only** | **Boolean** | If true, this attachment is only visible to teachers. When students view the assignment, attachments with this flag will be filtered out.  | [optional][default to false] |
 

@@ -9,7 +9,7 @@
 | **soundcloud_url** | **String** | SoundCloud Profile URL | [optional] |
 | **tiktok_url** | **String** | TikTok profile URL. For updates, also accepts TikTok usernames | [optional] |
 | **instagram_url** | **String** | Instagram profile URL. For updates, also accepts Instagram usernames | [optional] |
-| **website_url** | **String** | Personnal website URL | [optional] |
+| **website_url** | **String** | Personal website URL | [optional] |
 
 ## Example
 

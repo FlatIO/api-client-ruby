@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **lti_url** | **String** | An URL that can be used to launch LTI with this resource in a classroom. |  |
+| **lti_url** | **String** | A URL that can be used to launch LTI with this resource in a classroom. |  |
 
 ## Example
 

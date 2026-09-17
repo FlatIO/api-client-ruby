@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique identifier of the course on MusicFirst Task | [optional] |
+| **id** | **String** | Unique identifier of the task on MusicFirst Classroom | [optional] |
 | **alternate_link** | **String** | Link to MusicFirst Classroom task | [optional] |
 
 ## Example

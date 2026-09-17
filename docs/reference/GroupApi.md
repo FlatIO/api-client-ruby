@@ -312,7 +312,7 @@ end
 api_instance = FlatApi::GroupApi.new
 group = 'group_example' # String | Unique identifier of a Flat group 
 opts = {
-  parent: 'parent_example' # String | Filter the score forked from the score id `parent`
+  parent: 'parent_example' # String | Only return the scores forked from the score `parent`
 }
 
 begin
@@ -347,7 +347,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **group** | **String** | Unique identifier of a Flat group  |  |
-| **parent** | **String** | Filter the score forked from the score id &#x60;parent&#x60; | [optional] |
+| **parent** | **String** | Only return the scores forked from the score &#x60;parent&#x60; | [optional] |
 
 ### Return type
 

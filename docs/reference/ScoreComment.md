@@ -8,18 +8,18 @@
 | **type** | **String** | The type of the comment |  |
 | **user** | **String** | The author unique identifier |  |
 | **score** | **String** | The unique identifier of the score where the comment was posted |  |
-| **revision** | **String** | The unique identifier of revision the comment was posted | [optional] |
+| **revision** | **String** | The unique identifier of the revision where the comment was posted | [optional] |
 | **reply_to** | **String** | When the comment is a reply to another comment, the unique identifier of the parent comment  | [optional] |
 | **date** | **Time** | The date when the comment was posted |  |
 | **modification_date** | **Time** | The date of the last comment modification | [optional] |
-| **comment** | **String** | The comment text that can includes mentions using the following format: &#x60;@[id:username]&#x60;.  |  |
+| **comment** | **String** | The comment text that can include mentions using the following format: &#x60;@[id:username]&#x60;.  |  |
 | **raw_comment** | **String** | A raw version of the comment, that can be displayed without parsing the mentions.  |  |
 | **context** | [**ScoreCommentContext**](ScoreCommentContext.md) |  | [optional] |
-| **mentions** | **Array&lt;String&gt;** | The list of user identifier mentioned on the score | [optional] |
+| **mentions** | **Array&lt;String&gt;** | The list of user identifiers mentioned in this comment | [optional] |
 | **resolved** | **Boolean** | For inline comments, the comment can be marked as resolved and will be hidden in the future responses  | [optional] |
-| **resolved_by** | **String** | If the user is marked as resolved, this will contain the unique identifier of the User who marked this comment as resolved  | [optional] |
+| **resolved_by** | **String** | If the comment is marked as resolved, this will contain the unique identifier of the User who marked this comment as resolved  | [optional] |
 | **moderation** | [**ScoreCommentModeration**](ScoreCommentModeration.md) |  | [optional] |
-| **spam** | **Boolean** | &#x60;true  if the message has been detected as spam and hidden from other users  | [optional] |
+| **spam** | **Boolean** | &#x60;true&#x60; if the message has been detected as spam and hidden from other users  | [optional] |
 
 ## Example
 

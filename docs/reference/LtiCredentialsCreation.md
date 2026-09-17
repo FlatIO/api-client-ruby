@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** | Name of the couple of credentials |  |
+| **name** | **String** | Name of the pair of credentials |  |
 | **lms** | [**LmsName**](LmsName.md) |  |  |
 
 ## Example

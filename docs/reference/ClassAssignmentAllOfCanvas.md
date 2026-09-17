@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique identifier of the course on Canvas assignment | [optional] |
+| **id** | **String** | Unique identifier of the assignment on Canvas | [optional] |
 | **alternate_link** | **String** | Link to Canvas assignment | [optional] |
 
 ## Example

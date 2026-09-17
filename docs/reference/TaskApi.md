@@ -4,16 +4,16 @@ All URIs are relative to *https://api.flat.io/v2*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_task**](TaskApi.md#get_task) | **GET** /tasks/{task} | Get a task details |
+| [**get_task**](TaskApi.md#get_task) | **GET** /tasks/{task} | Get task details |
 
 
 ## get_task
 
 > <Task> get_task(task)
 
-Get a task details
+Get task details
 
-This method can be used to follow a task progression, for example while a score is being exported. 
+This method can be used to follow the progress of a task, for example while a score is being exported. 
 
 ### Examples
 
@@ -30,7 +30,7 @@ api_instance = FlatApi::TaskApi.new
 task = 'task_example' # String | Unique identifier for the task
 
 begin
-  # Get a task details
+  # Get task details
   result = api_instance.get_task(task)
   p result
 rescue FlatApi::ApiError => e
@@ -46,7 +46,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get a task details
+  # Get task details
   data, status_code, headers = api_instance.get_task_with_http_info(task)
   p status_code # => 2xx
   p headers # => { ... }

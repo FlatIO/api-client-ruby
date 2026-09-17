@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Unique identifier of the library.  This one can be used to list the underlying resources using &#x60;GET /v2/eduResources?parent&#x3D;{library-id}&#x60;  |  |
-| **name** | **String** | Name of the lirbary |  |
+| **name** | **String** | Name of the library |  |
 | **type** | **String** | Type of the library |  |
 | **visibility** | **String** | Visibility of the library |  |
 

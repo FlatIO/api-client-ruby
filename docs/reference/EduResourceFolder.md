@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **title** | **String** | Title of the folder | [optional] |
-| **assignments_types** | [**Array&lt;AssignmentType&gt;**](AssignmentType.md) | The assignment type of the resources that are included in the folder, | [optional] |
+| **assignments_types** | [**Array&lt;AssignmentType&gt;**](AssignmentType.md) | The assignment types of the resources included in the folder | [optional] |
 | **resources_count** | **Float** | The number of resources inside the folder | [optional] |
 
 ## Example
